@@ -10,17 +10,23 @@ class CardList(APIView):
     """
     List all cards, or create a new Card.
     """
+
     def get(self, request, format=None):
         cards = Card.objects.all().filter(user_id = request.user.id)
         serializer = CardSerializer(cards, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = CardSerializer(data=request.data)
+        userData = request.data
+        userData["user"] = request.user.id
+        serializer = CardSerializer(data=userData)
         if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            if Card.objects.filter(date_from=userData["date_from"], date_to=userData["date_to"], user_id=request.user.id).exists():
+                return Response(serializer.errors, status=status.HTTP_409_CONFLICT)
+            else:
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
 
 class CardDetail(APIView):
     """

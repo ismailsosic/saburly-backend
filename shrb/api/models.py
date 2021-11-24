@@ -5,7 +5,7 @@ from django.db.models.deletion import DO_NOTHING
 
 # Create your models here.
 class Card(models.Model):
-    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, related_name='cards',on_delete=models.DO_NOTHING)
     date_from = models.DateField(blank=False)
     date_to = models.DateField(blank=False)
     description = models.TextField(blank=False)
