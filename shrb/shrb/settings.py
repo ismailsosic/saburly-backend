@@ -24,9 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-gt971h7*6v1n_i8eh=&2f^en8a1zn@3#fha0!s77nnq#x%aqq)'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'saburly-backend.herokuapp.com',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -143,8 +146,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://cranky-heisenberg-878d76.netlify.app",
 ]
 
 CORS_ALLOW_METHODS = [
