@@ -1,1 +1,1 @@
-web: gununicorn shrb.wsgi --log-file -
+web: gunicorn shrb.wsgi --log-file -
